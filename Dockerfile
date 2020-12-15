@@ -122,15 +122,16 @@ RUN mkdir -p /home/renderer/src \
  && cd ..
 
 # Configure stylesheet
+# && git clone --single-branch --branch v4.23.0 https://github.com/gravitystorm/openstreetmap-carto.git --depth 1 \
 RUN mkdir -p /home/renderer/src \
  && cd /home/renderer/src \
- && git clone --single-branch --branch v4.23.0 https://github.com/gravitystorm/openstreetmap-carto.git --depth 1 \
- && cd openstreetmap-carto \
+ && git clone --single-branch --branch v4.23.0 https://github.com/giggls/openstreetmap-carto-de --depth 1 \
+ && cd openstreetmap-carto-de \
  && rm -rf .git \
  && npm install -g carto@0.18.2 \
  && carto project.mml > mapnik.xml \
  && scripts/get-shapefiles.py \
- && rm /home/renderer/src/openstreetmap-carto/data/*.zip
+ && rm /home/renderer/src/openstreetmap-carto-de/data/*.zip
 
 # Configure renderd
 RUN sed -i 's/renderaccount/renderer/g' /usr/local/etc/renderd.conf \
